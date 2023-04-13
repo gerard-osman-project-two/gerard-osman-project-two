@@ -1,42 +1,57 @@
-[
+{"myData"
+  "inventory": 
+  [
   {
-    "name": American marigold,
+    "name": 'American marigold',
     "price": 23.45,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p1.jpeg'
   },
   {
-    "name": Black eyed susan,
+    "name": 'Black eyed susan',
     "price": 25.45,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p2.jpeg',
   },
   {
-    "name": Bleeding heart,
+    "name": 'Bleeding heart',
     "price": 30.45,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p3.jpeg',
   },
   {
-    "name": Bloody cranesbill,
+    "name": 'Bloody cranesbill',
     "price": 45.00,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p4.jpeg'
   },
   {
-    "name": Butterfly weed,
+    "name": 'Butterfly weed',
     "price": 50.45,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p5.jpeg',
+
   },
   {
-    "name": Common yarrow,
+    "name": 'Common yarrow',
     "price": 65.00,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p6.jpeg'
   },
   {
-    "name": Double viburnum,
+    "name": 'Double viburnum',
     "price": 67.45,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p7.jpeg'
   },
   {
-    "name": Feather reed grass,
+    "name": 'Feather reed grass',
     "price": 20.00,
-    "quantity": 0
+    "quantity": 0,
+    "url": './assets/p8.jpeg'
   }
 ]
+"currencies" {
+
+}
+}
