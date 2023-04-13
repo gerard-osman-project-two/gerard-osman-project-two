@@ -1,0 +1,42 @@
+[
+  {
+    "name": American marigold,
+    "price": 23.45,
+    "quantity": 0
+  },
+  {
+    "name": Black eyed susan,
+    "price": 25.45,
+    "quantity": 0
+  },
+  {
+    "name": Bleeding heart,
+    "price": 30.45,
+    "quantity": 0
+  },
+  {
+    "name": Bloody cranesbill,
+    "price": 45.00,
+    "quantity": 0
+  },
+  {
+    "name": Butterfly weed,
+    "price": 50.45,
+    "quantity": 0
+  },
+  {
+    "name": Common yarrow,
+    "price": 65.00,
+    "quantity": 0
+  },
+  {
+    "name": Double viburnum,
+    "price": 67.45,
+    "quantity": 0
+  },
+  {
+    "name": Feather reed grass,
+    "price": 20.00,
+    "quantity": 0
+  }
+]
