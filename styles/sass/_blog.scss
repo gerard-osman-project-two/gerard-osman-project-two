@@ -1,0 +1,87 @@
+@use 'variables' as v;
+
+.blog {
+  font-family: v.$ff-primary;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.text-container {
+  margin: 0 auto 3rem;
+  width: 70%;
+}
+
+.blog-post-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+article {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  text-align: left;
+  line-height: 1.75rem;
+  background: v.$blue-faint;
+  border-radius: 0.5rem;
+  padding: 2rem 1.5rem;
+
+  img {
+    width: 100%;
+  }
+
+  span {
+    color: v.$green;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  h5 {
+    color: v.$grey-dark;
+    font-size: v.$fs-500;
+    text-transform: capitalize;
+  }
+}
+
+.author-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+// media queries
+
+@media (max-width: 940px) {
+  article {
+    flex-basis: 45%;
+    align-items: center;
+    text-align: center;
+    width: min-content;
+  }
+
+  .feature-article {
+    order: -1;
+  }
+
+  .author-flex-container {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  article {
+    flex-basis: 100%;
+    align-items: center;
+    text-align: center;
+    width: min-content;
+  }
+
+  .blog-wrapper {
+    width: 100%;
+  }
+}

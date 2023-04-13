@@ -1,0 +1,103 @@
+@use 'variables' as v;
+
+* {
+    // outline: 1px solid black;
+}
+
+.banner {
+    font-family: v.$ff-primary;
+    background: no-repeat url(../../assets/contact-header.jpg);
+    background-size: cover;
+    background-position: center/80%;
+    height: 40vh;
+}
+
+.banner-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-heading {
+    font-size: v.$fs-600;
+    font-weight: v.$fw-500;
+    text-transform: uppercase;
+}
+
+.form {
+    font-family: v.$ff-primary;
+    margin: 3rem 0;
+}
+
+.form-wrapper {
+    display: flex;
+    box-shadow: 0px 1px 6px 5px hsl(210, 14%, 89%);
+}
+
+.form-container-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: white;
+    background: center / cover no-repeat url(../../assets/contact.jpg);
+
+    // background-size: cover;
+    // background-position: center;
+    h2 {
+        font-weight: v.$fw-500;
+    }
+}
+
+.contact-form {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+input,
+textarea {
+    font-style: italic;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid v.$grey-light;
+    color: v.$grey-dark;
+    flex: 1;
+    flex-basis: 40%;
+}
+
+textarea {
+    flex: 1;
+    flex-basis: 100%;
+    max-width: 100%;
+}
+
+.btn-form {
+    font-size: v.$fs-400;
+    color: v.$white;
+    background: v.$green;
+    text-transform: uppercase;
+    padding: 1.25rem 2.25rem;
+    margin-left: auto;
+    border-radius: 1rem;
+    flex-basis: 30%;
+    border: 0;
+
+    &:hover,
+    &:focus {
+        background: v.$grey-dark;
+        color: v.$green;
+        cursor: pointer;
+        border: 3px solid v.$green;
+    }
+}
+
+// media queries
+
+@media (max-width: 960px) {
+    .form-wrapper {
+        flex-direction: column;
+    }
+}
