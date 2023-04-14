@@ -1,327 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PRONIA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
 
-<body>
-
+  <body>
     <header class="header-super">
-        <div class="wrapper header-super-wrapper">
-            <h2 class="heading-sale">Hello everyone! 25% off all products</h2>
-            <a href="#">CAD</a>
-            <a href="#">English</a>
-        </div>
+      <div class="wrapper header-super-wrapper">
+        <h2 class="heading-sale">Hello everyone! 25% off all products</h2>
+        <a href="#">CAD</a>
+        <a href="#">English</a>
+      </div>
     </header>
 
     <header class="header-main">
-        <div class="wrapper header-main-wrapper">
-            <a class="logo" href="./index.html"><img src="./assets/logo.png" alt="pronia logo"></a>
-            <nav class="nav-top">
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="./contact.html">Contact us</a></li>
-                </ul>
-            </nav>
-            <a class="cart" href="">
-                <div class="cart-items">
-                    <span class="cart-num">3</span>
-                </div>
-                <img class="shopping-cart" src="./assets/icons/shopping-bag-1.svg" alt="shopping bag icon">
-            </a>
-        </div>
+      <div class="wrapper header-main-wrapper">
+        <a class="logo" href="./index.html"
+          ><img src="./assets/logo.png" alt="pronia logo"
+        /></a>
+        <nav class="nav-top">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="./contact.html">Contact us</a></li>
+          </ul>
+        </nav>
+        <a class="cart" href="">
+          <div class="cart-items">
+            <span class="cart-num">3</span>
+          </div>
+          <img
+            class="shopping-cart"
+            src="./assets/icons/shopping-bag-1.svg"
+            alt="shopping bag icon"
+          />
+        </a>
+      </div>
     </header>
 
     <main>
+      <!-- FEATURE SECTION -->
 
-        <!-- FEATURE SECTION -->
+      <section class="feature">
+        <div class="wrapper feature-wrapper">
+          <div class="feature-text-container">
+            <h1>65% off <span>new plant</span></h1>
+            <p>Pronia, with 100% natural, organic & plant shop.</p>
+            <a class="btn btn-feature" href="#products">Discover now</a>
+          </div>
+          <div class="feature-image-container">
+            <img src="./assets/header.png" alt="photo of new plant on sale" />
+          </div>
+        </div>
+      </section>
 
-        <section class="feature">
-            <div class="wrapper feature-wrapper">
-                <div class="feature-text-container">
-                    <h1>65% off <span>new plant</span></h1>
-                    <p>Pronia, with 100% natural, organic & plant shop.</p>
-                    <a class="btn btn-feature" href="#products">Discover now</a>
-                </div>
-                <div class="feature-image-container">
-                    <img src="./assets/header.png" alt="photo of new plant on sale">
-                </div>
+      <!-- PAYMENT INFO SECTION -->
+
+      <section id="payment-info" class="payment-info">
+        <div class="wrapper payment-info-wrapper">
+          <div class="card">
+            <div class="payment-image-container">
+              <img src="./assets/icons/car.png" alt="delivery van icon" />
             </div>
-        </section>
-
-        <!-- PAYMENT INFO SECTION -->
-
-        <section id="payment-info" class="payment-info">
-            <div class="wrapper payment-info-wrapper">
-                <div class="card">
-                    <div class="payment-image-container">
-                        <img src="./assets/icons/car.png" alt="delivery van icon">
-                    </div>
-                    <div class="payment-text-container">
-                        <h4 class="pay-heading">free shipping</h4>
-                        <p>Capped at $319 per order</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="payment-image-container">
-                        <img src="./assets/icons/card.png" alt="credit card icon">
-                    </div>
-                    <div class="payment-text-container">
-                        <h4 class="pay-heading">safe payment</h4>
-                        <p>With our payment gateway</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="payment-image-container">
-                        <img src="./assets/icons/card.png" alt="card icon">
-                    </div>
-                    <div class="payment-text-container">
-                        <h4 class="pay-heading">best services</h4>
-                        <p>Friendly and super services</p>
-                    </div>
-                </div>
+            <div class="payment-text-container">
+              <h4 class="pay-heading">free shipping</h4>
+              <p>Capped at $319 per order</p>
             </div>
-        </section>
-
-        <!-- PRODUCTS SECTION -->
-
-        <section id="products" class="products">
-            <div class="wrapper products-wrapper">
-                <h3 class="section-heading products-heading">Our products</h3>
-                <ul class="product-categories-list">
-                    <li><a href="#">Featured</a></li>
-                    <li><a href="#">Bestseller</a></li>
-                    <li><a href="#">Latest</a></li>
-                </ul>
-
-                <div class="product-cards-container">
-                    <a class="grow" href="#">
-                        <div class="product-card">
-                            <img src="assets/p1.jpeg" alt="american marigold plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>American marigold</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p2.jpeg" alt="black eyed susan plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Black eyed susan</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p3.jpeg" alt="bleeding heart plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Bleeding heart</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p4.jpeg" alt="bloody cranesbill plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Bloody cranesbill</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p5.jpeg" alt="butterfly weed plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Butterfly weed</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p6.jpeg" alt="common yarrow plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Common yarrow</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p7.jpeg" alt="doublefile viburnum plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Doublefile viburnum</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="product-card">
-                            <img src="assets/p8.jpeg" alt="feather reed grass plant that is being sold">
-                            <button class="btn-add">
-                                <img src="assets/icons/cart.svg" alt="">
-                            </button>
-                            <p>Feather reed grass</p>
-                            <span>$23.45</span>
-                        </div>
-                    </a>
-                </div>
+          </div>
+          <div class="card">
+            <div class="payment-image-container">
+              <img src="./assets/icons/card.png" alt="credit card icon" />
             </div>
-        </section>
-
-        <!-- COLLECTIONS SECTION -->
-
-        <section class="collections">
-            <div class="wrapper collections-wrapper">
-                <div class="col-of-cac col-of-cac-1">
-                    <span>collection of cactus</span>
-                    <h4>pottery pots & plant</h4>
-                    <a class="btn btn-col" href="#products">shop now</a>
-                </div>
-                <div class="new-col new-col-1">
-                    <span>new collection</span>
-                    <h4>plant port</h4>
-                    <a class="btn btn-col" href="#products">shop now</a>
-                    <!-- empty <div> elements for flex-distribution -->
-                    <div class="hidden"></div>
-                    <div class="hidden"></div>
-                </div>
-                <div class="new-col new-col-2">
-                    <span>new collection</span>
-                    <h4>plant port</h4>
-                    <a class="btn btn-col" href="#products">shop now</a>
-                    <!-- empty <div> elements for flex-distribution -->
-                    <div class="hidden"></div>
-                    <div class="hidden"></div>
-                </div>
-                <div class="col-of-cac col-of-cac-2">
-                    <span>collection of cactus</span>
-                    <h4>hanging pots & plant</h4>
-                    <a class="btn btn-col" href="#products">shop now</a>
-                </div>
+            <div class="payment-text-container">
+              <h4 class="pay-heading">safe payment</h4>
+              <p>With our payment gateway</p>
             </div>
-        </section>
-
-        <!-- BLOG SECTION -->
-
-        <section id="blog" class="blog">
-            <div class="wrapper blog-wrapper">
-                <div class="text-container">
-                    <h3 class="section-heading blog-heading">Latest posts</h3>
-                    <p>Read the latest posts by Gerard Juan, an unremarkable gentleman who knows absolutely nothing
-                        about botany, but who recently learned how to water plants correctly.</p>
-                </div>
-                <div class="blog-post-container">
-                    <article>
-                        <div class="author-flex-container">
-                            <span>by: gerard j</span>
-                            <span>3 april 2023</span>
-                        </div>
-                        <h5>why you should care about plants</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia deserunt exercitationem,
-                            neque veniam voluptas cumque temporibus aliquam ut enim harum! Quisquam delectus rerum
-                            doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.</p>
-                        <img src="assets/blog1.jpeg" alt="a person holding a tray with several plants on it">
-                    </article>
-                    <article>
-                        <div class="author-flex-container">
-                            <span>by: gerard j</span>
-                            <span>3 april 2023</span>
-                        </div>
-                        <h5>mental health benefits of being a plant owner</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia deserunt exercitationem,
-                            neque veniam voluptas cumque temporibus aliquam ut enim harum! Quisquam delectus rerum
-                            doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.</p>
-                        <img src="assets/blog2.jpeg" alt="a potted plant with the sunlight in the background">
-                    </article>
-                    <article>
-                        <div class="author-flex-container">
-                            <span>by: gerard j</span>
-                            <span>3 april 2023</span>
-                        </div>
-                        <h5>How to plant dad 101</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia deserunt exercitationem,
-                            neque veniam voluptas cumque temporibus aliquam ut enim harum! Quisquam delectus rerum
-                            doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.</p>
-                        <img src="assets/blog3.jpeg" alt="a person sitting on the ground putting soil in a plant">
-                    </article>
-                </div>
+          </div>
+          <div class="card">
+            <div class="payment-image-container">
+              <img src="./assets/icons/card.png" alt="card icon" />
             </div>
-        </section>
-
-        <!-- FOOTER SECTION -->
-
-        <footer>
-            <div class="wrapper footer-wrapper">
-                <div class="footer-nav-container">
-                    <a class="logo" href=""><img src="./assets/logo.png" alt="pronia logo"></a>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, blanditiis laudantium suscipit fugit voluptatum eum!</p>
-                    <ul class="social-icons">
-                        <li><a href=""><img src="assets/icons/facebook-svgrepo-com.svg" alt="facebook icon"></a></li>
-                        <li><a href=""><img src="assets/icons/twitter.svg" alt="twitter icon"></a></li>
-                        <li><a href=""><img src="assets/icons/pinterest.svg" alt="pinterest icon"></a></li>
-                        <li><a href=""><img src="assets/icons/dribble.svg" alt="dribble icon"></a></li>
-                    </ul>
-                </div>
-                <nav class="footer-nav-container footer-nav-links">
-                    <ul class="col">
-                        <h5 class="footer-heading">Useful Links</h5>
-                        <li><a href="#">About pronia</a></li>
-                        <li><a href="#">How to shop</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="./contact.html">Contact us</a></li>
-                        <li><a href="#">Log in</a></li>
-                    </ul>
-                </nav>
-                <nav class="footer-nav-container footer-nav-links">
-                    <ul class="col">
-                        <h5 class="footer-heading">My Account</h5>
-                        <li><a href="#">Sign in</a></li>
-                        <li><a href="#">View cart</a></li>
-                        <li><a href="#">My wishlist</a></li>
-                        <li><a href="#">Track my order</a></li>
-                        <li><a href="#">Help</a></li>
-                    </ul>
-                </nav>
-                <nav class="footer-nav-container footer-nav-links">
-                    <ul class="col">
-                        <h5 class="footer-heading">Our Service</h5>
-                        <li><a href="#payment-info">Payment methods</a></li>
-                        <li><a href="#payment-info">Money guarantee</a></li>
-                        <li><a href="#payment-info">Returns</a></li>
-                        <li><a href="#payment-info">Shipping</a></li>
-                        <li><a href="#payment-info">Privacy policy</a></li>
-                    </ul>
-                </nav>
-                <div class="footer-nav-container">
-                    <h5 class="footer-heading">Got questions? Call us</h5>
-                    <span class="phone-num">123 456 789</span>
-                    <p>Your address goes here</p>
-                </div>
+            <div class="payment-text-container">
+              <h4 class="pay-heading">best services</h4>
+              <p>Friendly and super services</p>
             </div>
-        </footer>
+          </div>
+        </div>
+      </section>
 
+      <!-- PRODUCTS SECTION -->
+
+      <section id="products" class="products">
+        <div class="wrapper products-wrapper">
+          <h3 class="section-heading products-heading">Our products</h3>
+          <ul class="product-categories-list">
+            <li><a href="#">Featured</a></li>
+            <li><a href="#">Bestseller</a></li>
+            <li><a href="#">Latest</a></li>
+          </ul>
+
+          <div class="product-cards-container">
+            <a class="grow" href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p1.jpeg"
+                  alt="american marigold plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>American marigold</p>
+                <span>$23.45</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p2.jpeg"
+                  alt="black eyed susan plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Black eyed susan</p>
+                <span>$25.45</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p3.jpeg"
+                  alt="bleeding heart plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Bleeding heart</p>
+                <span>$30.45</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p4.jpeg"
+                  alt="bloody cranesbill plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Bloody cranesbill</p>
+                <span>$45.00</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p5.jpeg"
+                  alt="butterfly weed plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Butterfly weed</p>
+                <span>$50.45</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p6.jpeg"
+                  alt="common yarrow plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Common yarrow</p>
+                <span>$60.00</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p7.jpeg"
+                  alt="doublefile viburnum plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Doublefile viburnum</p>
+                <span>$67.45</span>
+              </div>
+            </a>
+            <a href="#">
+              <div class="product-card">
+                <img
+                  src="assets/p8.jpeg"
+                  alt="feather reed grass plant that is being sold"
+                />
+                <button class="btn-add">
+                  <img src="assets/icons/cart.svg" alt="" />
+                </button>
+                <p>Feather reed grass</p>
+                <span>$20.00</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLLECTIONS SECTION -->
+
+      <section class="collections">
+        <div class="wrapper collections-wrapper">
+          <div class="col-of-cac col-of-cac-1">
+            <span>collection of cactus</span>
+            <h4>pottery pots & plant</h4>
+            <a class="btn btn-col" href="#products">shop now</a>
+          </div>
+          <div class="new-col new-col-1">
+            <span>new collection</span>
+            <h4>plant port</h4>
+            <a class="btn btn-col" href="#products">shop now</a>
+            <!-- empty <div> elements for flex-distribution -->
+            <div class="hidden"></div>
+            <div class="hidden"></div>
+          </div>
+          <div class="new-col new-col-2">
+            <span>new collection</span>
+            <h4>plant port</h4>
+            <a class="btn btn-col" href="#products">shop now</a>
+            <!-- empty <div> elements for flex-distribution -->
+            <div class="hidden"></div>
+            <div class="hidden"></div>
+          </div>
+          <div class="col-of-cac col-of-cac-2">
+            <span>collection of cactus</span>
+            <h4>hanging pots & plant</h4>
+            <a class="btn btn-col" href="#products">shop now</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG SECTION -->
+
+      <section id="blog" class="blog">
+        <div class="wrapper blog-wrapper">
+          <div class="text-container">
+            <h3 class="section-heading blog-heading">Latest posts</h3>
+            <p>
+              Read the latest posts by Gerard Juan, an unremarkable gentleman
+              who knows absolutely nothing about botany, but who recently
+              learned how to water plants correctly.
+            </p>
+          </div>
+          <div class="blog-post-container">
+            <article>
+              <div class="author-flex-container">
+                <span>by: gerard j</span>
+                <span>3 april 2023</span>
+              </div>
+              <h5>why you should care about plants</h5>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia deserunt exercitationem, neque veniam voluptas cumque
+                temporibus aliquam ut enim harum! Quisquam delectus rerum
+                doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.
+              </p>
+              <img
+                src="assets/blog1.jpeg"
+                alt="a person holding a tray with several plants on it"
+              />
+            </article>
+            <article>
+              <div class="author-flex-container">
+                <span>by: gerard j</span>
+                <span>3 april 2023</span>
+              </div>
+              <h5>mental health benefits of being a plant owner</h5>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia deserunt exercitationem, neque veniam voluptas cumque
+                temporibus aliquam ut enim harum! Quisquam delectus rerum
+                doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.
+              </p>
+              <img
+                src="assets/blog2.jpeg"
+                alt="a potted plant with the sunlight in the background"
+              />
+            </article>
+            <article>
+              <div class="author-flex-container">
+                <span>by: gerard j</span>
+                <span>3 april 2023</span>
+              </div>
+              <h5>How to plant dad 101</h5>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Mollitia deserunt exercitationem, neque veniam voluptas cumque
+                temporibus aliquam ut enim harum! Quisquam delectus rerum
+                doloremque eligendi? Voluptas obcaecati nemo tenetur debitis.
+              </p>
+              <img
+                src="assets/blog3.jpeg"
+                alt="a person sitting on the ground putting soil in a plant"
+              />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER SECTION -->
+
+      <footer>
+        <div class="wrapper footer-wrapper">
+          <div class="footer-nav-container">
+            <a class="logo" href=""
+              ><img src="./assets/logo.png" alt="pronia logo"
+            /></a>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Exercitationem, blanditiis laudantium suscipit fugit voluptatum
+              eum!
+            </p>
+            <ul class="social-icons">
+              <li>
+                <a href=""
+                  ><img
+                    src="assets/icons/facebook-svgrepo-com.svg"
+                    alt="facebook icon"
+                /></a>
+              </li>
+              <li>
+                <a href=""
+                  ><img src="assets/icons/twitter.svg" alt="twitter icon"
+                /></a>
+              </li>
+              <li>
+                <a href=""
+                  ><img src="assets/icons/pinterest.svg" alt="pinterest icon"
+                /></a>
+              </li>
+              <li>
+                <a href=""
+                  ><img src="assets/icons/dribble.svg" alt="dribble icon"
+                /></a>
+              </li>
+            </ul>
+          </div>
+          <nav class="footer-nav-container footer-nav-links">
+            <ul class="col">
+              <h5 class="footer-heading">Useful Links</h5>
+              <li><a href="#">About pronia</a></li>
+              <li><a href="#">How to shop</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="./contact.html">Contact us</a></li>
+              <li><a href="#">Log in</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav-container footer-nav-links">
+            <ul class="col">
+              <h5 class="footer-heading">My Account</h5>
+              <li><a href="#">Sign in</a></li>
+              <li><a href="#">View cart</a></li>
+              <li><a href="#">My wishlist</a></li>
+              <li><a href="#">Track my order</a></li>
+              <li><a href="#">Help</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav-container footer-nav-links">
+            <ul class="col">
+              <h5 class="footer-heading">Our Service</h5>
+              <li><a href="#payment-info">Payment methods</a></li>
+              <li><a href="#payment-info">Money guarantee</a></li>
+              <li><a href="#payment-info">Returns</a></li>
+              <li><a href="#payment-info">Shipping</a></li>
+              <li><a href="#payment-info">Privacy policy</a></li>
+            </ul>
+          </nav>
+          <div class="footer-nav-container">
+            <h5 class="footer-heading">Got questions? Call us</h5>
+            <span class="phone-num">123 456 789</span>
+            <p>Your address goes here</p>
+          </div>
+        </div>
+      </footer>
     </main>
-
-</body>
-
+    <script src="./js/scripts.js" type="module"></script>
+  </body>
 </html>
