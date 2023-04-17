@@ -47,6 +47,7 @@
   {
     "name": 'Feather reed grass',
     "price": 20.00,
+    "stock": 10,
     "quantity": 0,
     "url": './assets/p8.jpeg'
   }

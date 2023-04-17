@@ -36,7 +36,10 @@ import {
 
 // MVP//
 // add event listener 'click' to plant icons that will return a new shopping cart array of chosen plants (default is 0)
-  // Determine which plant will be added to the shopping cart (maybe id in each button) 
+  // increase counter on shopping cart icon
+  // Determine which plant will be added to the shopping cart (maybe id in each button)
+  // Add plant price to total value
+  // Decrease stock value of chosen plant (stretch goal)
 
 // Write a function that displays the available inventory on the page, in correct currency
   // Since we've filtered already, we can use a "currentStock" array that was created as a result of the filter
