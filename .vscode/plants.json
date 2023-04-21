@@ -57,20 +57,20 @@
     "symbol": "$",
     "displayName": "USD",
     "altText": "the US flag",
-    "flag": "images/USD-flag.png",
+    "flag": "images/USD-flag.png"
   },
   "cad": {
     "exchange": 1.28,
     "symbol": "$",
     "displayName": "CAD",
     "altText": "the Canadian flag",
-    "flag": "images/CAD-flag.png",
+    "flag": "images/CAD-flag.png"
   },
   "gbp": {
     "exchange": 0.76,
     "symbol": "£",
     "displayName": "GBP",
     "altText": "the UK flag",
-    "flag": "images/GBP-flag.png",
-  },
-};
+    "flag": "images/GBP-flag.png"
+  }
+}
