@@ -1,16 +1,99 @@
 import app from './firebaseConfig.js';
-import {
-  getDatabase,
-  ref,
-  push,
-  onValue,
-} from 'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js';
+import {getDatabase, ref, set, push, onValue} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
 
 // Step 1:  Create a file (firebase.js) to configure and export the Firebase object.
 // Import the database object, and any required Firebase modules at the top of the main app file (app.js)
 // Call getDatabase() and ref() to create a reference to the Firebase database.
 
+const database = getDatabase(app);
+const dbRef = ref(database);
+
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
+
+const addToDatabase = (key, value) => {
+  const customRef = ref(database, key);
+  set(customRef, value);
+};
+
+// Array of plant objects
+const plants = [
+  {
+    name: 'American marigold',
+    price: 23.45,
+    cartQuantity: 0,
+    url: './assets/p1.jpeg',
+  },
+  {
+    name: 'Black eyed susan',
+    price: 25.45,
+    cartQuantity: 0,
+    url: './assets/p2.jpeg',
+  },
+  {
+    name: 'Bleeding heart',
+    price: 30.45,
+    cartQuantity: 0,
+    url: './assets/p3.jpeg',
+  },
+  {
+    name: 'Bloody cranesbill',
+    price: 45,
+    cartQuantity: 0,
+    url: './assets/p4.jpeg',
+  },
+  {
+    name: 'Butterfly weed',
+    price: 50.45,
+    cartQuantity: 0,
+    url: './assets/p5.jpeg',
+  },
+  {
+    name: 'Common yarrow',
+    price: 65,
+    cartQuantity: 0,
+    url: './assets/p6.jpeg',
+  },
+  {
+    name: 'Double viburnum',
+    price: 67.45,
+    cartQuantity: 0,
+    url: './assets/p7.jpeg',
+  },
+  {
+    name: 'Feather reed grass',
+    price: 20,
+    cartQuantity: 0,
+    url: './assets/p8.jpeg',
+  },
+];
+
+// An object that allows us to organize information that will be displayed conditionally depending on what currency the user selects:
+const currencies = {
+  usd: {
+    exchange: 1,
+    symbol: `$`,
+    displayName: `USD`,
+    altText: `the US flag`,
+    flag: `images/USD-flag.png`,
+  },
+  cad: {
+    exchange: 1.28,
+    symbol: `$`,
+    displayName: `CAD`,
+    altText: `the Canadian flag`,
+    flag: `images/CAD-flag.png`,
+  },
+  gbp: {
+    exchange: 0.76,
+    symbol: `£`,
+    displayName: `GBP`,
+    altText: `the UK flag`,
+    flag: `images/GBP-flag.png`,
+  },
+};
+
+addToDatabase('plants', plants);
+addToDatabase('currencies', currencies);
 
 // Step 3: Call our function twice, once to add our inventory data, and another time to add our currencies
 
