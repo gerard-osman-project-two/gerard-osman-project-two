@@ -465,7 +465,7 @@ header {
   outline: 0;
 }
 
-.product-cards-container {
+.plants-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -474,34 +474,31 @@ header {
   margin: 3rem 0;
   gap: 1rem;
 }
-.product-cards-container > a {
+.plants-list > li {
   -ms-flex-preferred-size: calc((100% - 3rem) / 4);
       flex-basis: calc((100% - 3rem) / 4);
+}
+
+.plants-list a {
+  display: block;
   -webkit-transition: 0.1s linear;
   transition: 0.1s linear;
+  width: 100%;
+  position: relative;
+  margin-bottom: 0.5rem;
 }
-.product-cards-container > a:hover {
+
+.plants-list a:hover {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
   -webkit-transition: 0.2s linear;
   transition: 0.2s linear;
 }
 
-.product-card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 8px;
-}
-.product-card > img {
+.plants-list img {
   width: 100%;
   -ms-flex-item-align: center;
       align-self: center;
-  margin-bottom: -2.75rem;
 }
 
 .btn-add {
@@ -512,9 +509,10 @@ header {
   -webkit-box-shadow: 1px 3px 5px 1px hsl(210, 14%, 89%);
           box-shadow: 1px 3px 5px 1px hsl(210, 14%, 89%);
   margin-left: 0.5rem;
+  position: absolute;
+  bottom: 10px;
 }
-.btn-add:hover {
-  width: 2.5rem;
+.btn-add:hover, .btn-add:focus {
   -webkit-box-shadow: 1px 3px 5px 1px hsl(85, 52%, 64%);
           box-shadow: 1px 3px 5px 1px hsl(85, 52%, 64%);
   cursor: pointer;
@@ -530,31 +528,31 @@ header {
 }
 
 @media (max-width: 940px) {
-  .product-cards-container {
+  .plants-list {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     gap: 1rem;
   }
-  .product-cards-container > a {
+  .plants-list > li {
     -ms-flex-preferred-size: calc((100% - 2rem) / 3);
         flex-basis: calc((100% - 2rem) / 3);
   }
 }
 @media (max-width: 768px) {
-  .product-cards-container {
+  .plants-list {
     gap: 1rem;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .product-cards-container > a {
+  .plants-list > li {
     -ms-flex-preferred-size: calc((100% - 1rem) / 2);
         flex-basis: calc((100% - 1rem) / 2);
   }
 }
 @media (max-width: 480px) {
-  .product-cards-container > a {
+  .plants-list > li {
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
@@ -872,9 +870,9 @@ footer .logo {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -webkit-box-align: left;
+        -ms-flex-align: left;
+            align-items: left;
   }
   .footer-wrapper > div:last-child,
   .footer-wrapper > div:first-child p {
@@ -882,6 +880,10 @@ footer .logo {
   }
   .social-icons {
     padding-top: 1rem;
+  }
+  .social-icons > li {
+    -ms-flex-preferred-size: 0;
+        flex-basis: 0;
   }
 }
 .banner {
