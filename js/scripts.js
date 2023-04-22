@@ -120,6 +120,7 @@ onValue(dbRef, (data) => {
     plantsUL.innerHTML = '';
     // loop through plants and create an LI for each item
     plants.forEach((item) => {
+      console.log(item);
       const newLI = document.createElement('li');
       newLI.innerHTML = `
       <a href="#">
