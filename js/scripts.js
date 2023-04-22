@@ -8,7 +8,13 @@ import {getDatabase, ref, set, push, onValue} from 'https://www.gstatic.com/fire
 const database = getDatabase(app);
 const dbRef = ref(database);
 
+// reference to the plants in our database
+const shoppingCartRef = ref(database, '/inventory')
+
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
+
+// global variables
+const ulElement = document.querySelector(`.plants-list`)
 
 const addToDatabase = (key, value) => {
   const plantRef = ref(database, key);
@@ -104,9 +110,17 @@ const currencies = {
 addToDatabase('plants', plants);
 addToDatabase('currencies', currencies);
 
-// Step 4:  Call onValue() to get a snapshot of the database, and to get a new snapshot any time the data changes/updates.
-// Clear all content in the UL on the page, so that we can update() it with the current list of selected plants
-// Store our currencies and inventory data in variables
+// //Modal box
+// const modal = document.querySelector('.modal')
+//       const openModal = document.querySelector('.cart');
+//       const closeModal = document.querySelector('.close-button')
+
+//       openModal.addEventListener('click', () => {
+//         modal.showModal()//Allows to escape via esc button
+//       })
+//       closeModal.addEventListener('click', () => {
+//         modal.close()
+//       })
 
 onValue(dbRef, (data) => {
   const storeData = data.val();
@@ -120,7 +134,7 @@ onValue(dbRef, (data) => {
     plantsUL.innerHTML = '';
     // loop through plants and create an LI for each item
     plants.forEach((item) => {
-      console.log(item);
+      // console.log(item);
       const newLI = document.createElement('li');
       newLI.innerHTML = `
       <a href="#">
@@ -139,45 +153,92 @@ onValue(dbRef, (data) => {
   displayItems(currencies.cad);
 });
 
+// code for adding plants to our cart
+// attached the event listender to the ul because the ul exists to javascript when we load our page
+
+
 // Step 5:  Loop through the snapshot object.
-// For each plant in the database:
-//
-// filter our inventory data to remove items that are out of stock
-// filter will return a new array that only includes items that are in stock
-// Create a new LI, IMG, 2 P/SPAN, 2 BUTTON elements (document.createElement())
-// Put plant image, name, price, quantity in innerHTML of respective elements that we just created, and each into LI
-// Use document.querySelector() to get:
-// The UL/P/SPAN where info about plants in cart will be displayed (e.g. quantity, price, name)
-// The SPAN where total price will be displayed
-//  The BUTTONS that increase/decrease the quantity of individual items in cart
-// The BUTTON to purchase all items in cart
-// Append the new LI into UL
+const addToCart = (selectedPlant) => {
+  // create a reference to the specific plant in firebase
+  const chosenRef = ref(database,'/plants/${selectedPlant}')
+  console.log(selectedPlant)
+}
 
-// Step 6:  Initialize cartQuantity as 0
-// listen for clicks on the shopping icons
-// increment the cartQuantity variable when the button is clicked
-// change the cartQuantity element in the HTML to show the new cartQuantity
 
-// Step 7:  Initialize totalCost as 0
-// listen for clicks on the shopping icons
-// Create a function that is the totalCost equals the sum of inventory.price when the button is clicked
-// add a <p> element in the HTML
-//change the total-cost id int he HTML to show the new total
+// code for adding items to our favourites
+// attach the event listener to the ul because the ul exists to javascript when we load our page
+ulElement.addEventListener('click', (event) => {
+  // only run code if the user clicks on the BUTTON element
+  if(event.target.tagName === 'BUTTON') {
+    // get the id attribute value from the list item
+    // pass the id attribute value as an argument to our addToFaves function
+    addToFaves(event.target.parentElement.id)
+  }
+})
 
-// STRETCH GOALS //
-// Add an event listener 'click' to the shopping cart icon to open modal box
-// Add an event listener 'click' to the close-modal button
 
-// MVP rough draft//
-// add event listener 'click' to plant icons that will return a new shopping cart array of chosen plants (default is 0)
-// increase counter on shopping cart icon
-// Determine which plant will be added to the shopping cart (maybe id in each button)
-// Add plant price to total value
-// Decrease stock value of chosen plant (stretch goal)
 
-// Write a function that displays the available inventory on the page, in correct currency
-// Since we've filtered already, we can use a "currentStock" array that was created as a result of the filter
+const addToFaves = (selectedPlant) => {
+  // create a reference to the specific plant in firebase
+  const chosenRef = ref(database, `/plants/${selectedPlant}`)
+  console.log(selectedPlant)
+get(chosenRef)
+  .then((snapshot) => {
+    
+    const storeData = snapshot.val()
+    // console.log(storeData)//testing
 
-// Attach an event listener that will notice when a user clicks on a currency button, finds out which curreny they have selected, and calls our dislay items method again. Don't forget to update the flag at the top right
+    // our new favourite anima object
+    const favPlant = {
+      alt: storeData.alt,
+      imgUrl: storeData.url,
+      id: storeData.id
+    }
 
-// By now should be able to declare two functions: one to display our items, another to handle any currency changes
+    const favState = {
+      isFavourited: true
+    }
+
+    update(chosenRef, favState)
+
+    // console.log(favPlant)//testing
+    push(shoppingCartRef, favPlant)
+  })
+  // create a new object that represents our selected plant
+  // this new object will have some of the properties of the original plant object
+  // push this new object to a new location in firebase(/favourites section)
+}
+
+// display our selected plants
+onValue(shoppingCartRef, (data) => {
+  // clear out the section every time we add anew favourite to avoid data constatly appending and duplication on our page
+  const ulElement = document.querySelector("#shoppingCart")
+  
+  ulElement.innerHTML = '';
+
+  const favPlantData = data.val();
+  // console.log(favPlantData)//testing
+  // console.log('fav plant data', data.val)//testing
+
+  // loop over our object and create our elements
+  for (let key in favPlantData) {
+    // console.log(favPlantData[key])//testing
+
+    const listItem = document.createElement('li');
+
+    const image = document.createElement('img');
+
+    image.src = favPlantData[key].imgUrl
+    image.alt = favPlantData[key].alt
+    // console.log(image);//testing
+
+    // add a remove button that will be for bonus content later
+    const remove = document.createElement('button');
+    remove.innerText = "❌"
+
+    // append the image and button to the list item
+    listItem.append(image, remove);
+    // append the list item to the ul that already exists in our html
+    ulElement.append(listItem)
+  }
+})
