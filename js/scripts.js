@@ -11,8 +11,8 @@ const dbRef = ref(database);
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
 
 const addToDatabase = (key, value) => {
-  const customRef = ref(database, key);
-  set(customRef, value);
+  const plantRef = ref(database, key);
+  set(plantRef, value);
 };
 
 // Array of plant objects
@@ -21,48 +21,56 @@ const plants = [
     name: 'American marigold',
     price: 23.45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p1.jpeg',
   },
   {
     name: 'Black eyed susan',
     price: 25.45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p2.jpeg',
   },
   {
     name: 'Bleeding heart',
     price: 30.45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p3.jpeg',
   },
   {
     name: 'Bloody cranesbill',
     price: 45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p4.jpeg',
   },
   {
     name: 'Butterfly weed',
     price: 50.45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p5.jpeg',
   },
   {
     name: 'Common yarrow',
     price: 65,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p6.jpeg',
   },
   {
     name: 'Double viburnum',
     price: 67.45,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p7.jpeg',
   },
   {
     name: 'Feather reed grass',
     price: 20,
     cartQuantity: 0,
+    storeQuantity: 10,
     url: './assets/p8.jpeg',
   },
 ];
@@ -92,14 +100,44 @@ const currencies = {
   },
 };
 
+// Step 3: Call our function twice, once to add our inventory data, and another time to add our currencies
 addToDatabase('plants', plants);
 addToDatabase('currencies', currencies);
-
-// Step 3: Call our function twice, once to add our inventory data, and another time to add our currencies
 
 // Step 4:  Call onValue() to get a snapshot of the database, and to get a new snapshot any time the data changes/updates.
 // Clear all content in the UL on the page, so that we can update() it with the current list of selected plants
 // Store our currencies and inventory data in variables
+
+onValue(dbRef, (data) => {
+  const storeData = data.val();
+  const plants = storeData.plants;
+  const currencies = storeData.currencies;
+  // ========== FILTERS FOR WHAT PLANTS APPEAR INITIALLY GO HERE ==========
+  // put [filtered] item on page with a chosenCurrency param
+  const displayItems = (chosenCurrency) => {
+    // Find UL element that will contain our plants and empty it of any contents
+    const plantsUL = document.querySelector('.plants-list');
+    plantsUL.innerHTML = '';
+    // loop through plants and create an LI for each item
+    plants.forEach((item) => {
+      console.log(item);
+      const newLI = document.createElement('li');
+      newLI.innerHTML = `
+      <a href="#">
+        <img src="${item.url}" alt=""/>
+        <button class="btn-add">
+          <img src="assets/icons/cart.svg" alt=""/>
+        </button>
+      </a>
+      <p>${item.name}</p>
+      <span>${chosenCurrency.symbol}${(item.price * chosenCurrency.exchange).toFixed(2)}</p>
+      `;
+      // append the LI to UL
+      plantsUL.appendChild(newLI);
+    });
+  };
+  displayItems(currencies.cad);
+});
 
 // Step 5:  Loop through the snapshot object.
 // For each plant in the database:
