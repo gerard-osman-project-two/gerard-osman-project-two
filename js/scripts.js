@@ -1,5 +1,5 @@
 import app from './firebaseConfig.js';
-import {getDatabase, ref, set, push, onValue} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
+import {getDatabase, ref, set, push, get, onValue} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
 
 // Step 1:  Create a file (firebase.js) to configure and export the Firebase object.
 // Import the database object, and any required Firebase modules at the top of the main app file (app.js)
@@ -9,17 +9,18 @@ const database = getDatabase(app);
 const dbRef = ref(database);
 
 // reference to the plants in our database
-const shoppingCartRef = ref(database, '/inventory');
+const shopRef = ref(database, '/plants');
+// const shopRef = snapshot.value;
 
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
 
 // global variables
-const ulElement = document.querySelector('.plants-list');
-const ulCart = document.querySelector('.shoppingCartContainer');
+const plantsUL = document.querySelector('.plants-list');
+const cartUL = document.querySelector('.shoppingCartContainer');
 
 const addToDatabase = (key, value) => {
-  const plantRef = ref(database, key);
-  set(plantRef, value);
+  const shopRef = ref(database, key);
+  set(shopRef, value);
 };
 
 // Array of plant objects
@@ -29,7 +30,7 @@ const plants = [
     price: 23.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p1.jpeg',
+    url: 'assets/p1.jpeg',
     alt: 'an american marigold plant',
     inCart: false,
   },
@@ -151,7 +152,6 @@ onValue(dbRef, (data) => {
     plantsUL.innerHTML = '';
     // loop through plants and create an LI for each item
     plants.forEach((item) => {
-      // console.log(item);
       const newLI = document.createElement('li');
       newLI.innerHTML = `
       <a href="#">
@@ -170,86 +170,104 @@ onValue(dbRef, (data) => {
   displayItems(currencies.cad);
 });
 
-// code for adding plants to our cart
-// attached the event listener to the ul because the ul exists to javascript when we load our page
+// code for adding items to our cart
+// attach the event listener to the ul because the ul 'exists' to javascript when we load our page
+plantsUL.addEventListener('click', (event) => {
+  // console.log(event.target);
+  if (event.target.tagName === 'IMG') {
+    // console.log(event.target.parentElement.previousElementSibling.alt);
+    console.log(event.target.parentElement.previousElementSibling.attributes.src);
+    // addToCart(event.target.attributes.src);
+  }
+});
 
-// Step 5:  Loop through the snapshot object.
-const addToCart = (selectedPlant) => {
-  // create a reference to the specific plant in firebase
-  const chosenRef = ref(database, '/plants/${selectedPlant}');
-  console.log(selectedPlant);
-};
+// const addToCart = (selectedPlant) => {
+//   const chosenRef = ref(database, '/plants/0');
+// };
+
+const plantData = get(shopRef).then((snapshot) => {
+  console.log(snapshot.val()[0].url);
+});
+
+// ====================================================== //
+// ==================== OSMAN'S CODE ==================== //
+// ====================================================== //
+
+// ========== code for adding plants to our cart ==========
+// attached the event listener to the ul because the ul exists to javascript when we load our page
 
 // code for adding items to our favourites
 // attach the event listener to the ul because the ul exists to javascript when we load our page
-ulElement.addEventListener('click', (event) => {
-  // only run code if the user clicks on the BUTTON element
-  if (event.target.tagName === 'BUTTON') {
-    // get the id attribute value from the list item
-    // pass the id attribute value as an argument to our addToFaves function
-    addToFaves(event.target.parentElement.id);
-  }
-});
 
-const addToFaves = (selectedPlant) => {
-  // create a reference to the specific plant in firebase
-  const chosenRef = ref(database, `/plants/${selectedPlant}`);
-  console.log(selectedPlant);
-  get(chosenRef).then((snapshot) => {
-    const storeData = snapshot.val();
-    // console.log(storeData)//testing
+// ulElement.addEventListener('click', (event) => {
+//   // only run code if the user clicks on the BUTTON element
+//   if (event.target.tagName === 'BUTTON') {
+//     // get the id attribute value from the list item
+//     // pass the id attribute value as an argument to our addToCart function
+//     addToCart(event.target.parentElement.id);
+//   }
+// });
 
-    // our new favourite anima object
-    const favPlant = {
-      alt: storeData.alt,
-      imgUrl: storeData.url,
-      id: storeData.id,
-    };
+// // Step 5:  Loop through the snapshot object.
+// const addToCart = (selectedPlant) => {
+//   // create a reference to the specific plant in firebase
+//   const chosenRef = ref(database, `/plants/${selectedPlant}`);
+//   console.log(selectedPlant);
+//   get(chosenRef).then((snapshot) => {
+//     const storeData = snapshot.val();
+//     // console.log(storeData)//testing
 
-    const favState = {
-      isFavourited: true,
-    };
+//     // our new favourite animal object
+//     const favPlant = {
+//       alt: storeData.alt,
+//       imgUrl: storeData.url,
+//       id: storeData.id,
+//     };
 
-    update(chosenRef, favState);
+//     const favState = {
+//       isFavourited: true,
+//     };
 
-    // console.log(favPlant)//testing
-    push(shoppingCartRef, favPlant);
-  });
-  // create a new object that represents our selected plant
-  // this new object will have some of the properties of the original plant object
-  // push this new object to a new location in firebase(/favourites section)
-};
+//     update(chosenRef, favState);
 
-// display our selected plants
-onValue(shoppingCartRef, (data) => {
-  // clear out the section every time we add anew favourite to avoid data constatly appending and duplication on our page
-  const ulElement = document.querySelector('#shoppingCart');
+//     // console.log(favPlant)//testing
+//     push(shoppingCartRef, favPlant);
+//   });
+//   // create a new object that represents our selected plant
+//   // this new object will have some of the properties of the original plant object
+//   // push this new object to a new location in firebase(/favourites section)
+// };
 
-  ulElement.innerHTML = '';
+// // display our selected plants
+// onValue(shoppingCartRef, (data) => {
+//   // clear out the section every time we add anew favourite to avoid data constatly appending and duplication on our page
+//   const ulElement = document.querySelector('#shoppingCart');
 
-  const favPlantData = data.val();
-  // console.log(favPlantData)//testing
-  // console.log('fav plant data', data.val)//testing
+//   ulElement.innerHTML = '';
 
-  // loop over our object and create our elements
-  for (let key in favPlantData) {
-    // console.log(favPlantData[key])//testing
+//   const favPlantData = data.val();
+//   // console.log(favPlantData)//testing
+//   // console.log('fav plant data', data.val)//testing
 
-    const listItem = document.createElement('li');
+//   // loop over our object and create our elements
+//   for (let key in favPlantData) {
+//     // console.log(favPlantData[key])//testing
 
-    const image = document.createElement('img');
+//     const listItem = document.createElement('li');
 
-    image.src = favPlantData[key].imgUrl;
-    image.alt = favPlantData[key].alt;
-    // console.log(image);//testing
+//     const image = document.createElement('img');
 
-    // add a remove button that will be for bonus content later
-    const remove = document.createElement('button');
-    remove.innerText = '❌';
+//     image.src = favPlantData[key].imgUrl;
+//     image.alt = favPlantData[key].alt;
+//     // console.log(image);//testing
 
-    // append the image and button to the list item
-    listItem.append(image, remove);
-    // append the list item to the ul that already exists in our html
-    ulElement.append(listItem);
-  }
-});
+//     // add a remove button that will be for bonus content later
+//     const remove = document.createElement('button');
+//     remove.innerText = '❌';
+
+//     // append the image and button to the list item
+//     listItem.append(image, remove);
+//     // append the list item to the ul that already exists in our html
+//     ulElement.append(listItem);
+//   }
+// });
