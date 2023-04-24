@@ -1,5 +1,5 @@
 import app from './firebaseConfig.js';
-import {getDatabase, ref, set, push, get, onValue, update} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
+import {getDatabase, ref, set, push, onValue} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
 
 // Step 1:  Create a file (firebase.js) to configure and export the Firebase object.
 // Import the database object, and any required Firebase modules at the top of the main app file (app.js)
@@ -9,97 +9,75 @@ const database = getDatabase(app);
 const dbRef = ref(database);
 
 // reference to the plants in our database
-const shopRef = ref(database, '/plants');
+const plantRef = ref(database, '/plants');
 const cartRef = ref(database, '/cart');
 
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
 
-// global variables
-const plantsUL = document.querySelector('.plants-list');
-const cartUL = document.querySelector('.shoppingCartContainer');
-
 const addToDatabase = (key, value) => {
-  const shopRef = ref(database, key);
-  set(shopRef, value);
+  const plantRef = ref(database, key);
+  set(plantRef, value);
 };
 
-// Array of plant objects
+Array of plant, currency, and selected objects
 const plants = [
   {
     name: 'American marigold',
     price: 23.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p1.jpeg',
-    alt: 'an american marigold plant',
-    inCart: false,
+    url: './assets/p1.jpeg',
   },
   {
     name: 'Black eyed susan',
     price: 25.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p2.jpeg',
-    alt: 'a black eyed susan plant',
-    inCart: false,
+    url: './assets/p2.jpeg',
   },
   {
     name: 'Bleeding heart',
     price: 30.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p3.jpeg',
-    alt: 'a bleeding heart plant',
-    inCart: false,
+    url: './assets/p3.jpeg',
   },
   {
     name: 'Bloody cranesbill',
     price: 45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p4.jpeg',
-    alt: 'a bloody cranesbill plant',
-    inCart: false,
+    url: './assets/p4.jpeg',
   },
   {
     name: 'Butterfly weed',
     price: 50.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p5.jpeg',
-    alt: 'a butterfly weed plant',
-    inCart: false,
+    url: './assets/p5.jpeg',
   },
   {
     name: 'Common yarrow',
     price: 65,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p6.jpeg',
-    alt: 'a common yarrow plant',
-    inCart: false,
+    url: './assets/p6.jpeg',
   },
   {
     name: 'Double viburnum',
     price: 67.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p7.jpeg',
-    alt: 'a double viburnum plant',
-    inCart: false,
+    url: './assets/p7.jpeg',
   },
   {
     name: 'Feather reed grass',
     price: 20,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: 'assets/p8.jpeg',
-    alt: 'a feather reed grass plant',
-    inCart: false,
+    url: './assets/p8.jpeg',
   },
 ];
-
-// An object that allows us to organize information that will be displayed conditionally depending on what currency the user selects:
 const currencies = {
   usd: {
     exchange: 1,
@@ -123,214 +101,129 @@ const currencies = {
     flag: `images/GBP-flag.png`,
   },
 };
+const selected = {
+  test: {
+    testin1: 0,
+    testing2: 2,
+  }
+}
 
-// Step 3: Call our function twice, once to add our inventory data, and another time to add our currencies
+const cart = [];
+
+const addToCart = (item) => {
+
+  item.cartQuantity = 1;
+  cart.push(item)
+  addToDatabase('cart', cart)
+}
+
+adding to the database
 addToDatabase('plants', plants);
 addToDatabase('currencies', currencies);
+addToDatabase('selected', selected);
 
-// ========== Modal box ==========
-// const modal = document.querySelector('.modal')
-//       const openModal = document.querySelector('.cart');
-//       const closeModal = document.querySelector('.close-button')
+// const buttonsCart = () => {
+//   const removeCartItemButtons = document.getElementById("remove")
+//   removeCartItemButtons.addEventListener('click', function() {
+//   console.log("Removed")
+//   })
 
-//       openModal.addEventListener('click', () => {
-//         modal.showModal()//Allows to escape via esc button
-//       })
-//       closeModal.addEventListener('click', () => {
-//         modal.close()
-//       })
+//   const increaseCartItemButtons = document.getElementById("increase")
 
+//   increaseCartItemButtons.addEventListener('click', function() {
+//   console.log("Increased")
+//   })
+
+//   const decreaseCartItemButtons = document.getElementById("decrease")
+//   decreaseCartItemButtons.addEventListener('click', function() {
+//   console.log("Decreased")
+//   })
+// }
+// buttonsCart()
+
+// display products
 onValue(dbRef, (data) => {
   const storeData = data.val();
+  // window.storeData =storeData //global variable that I can access in the browser inspect and console.log whenever I need
   const plants = storeData.plants;
   const currencies = storeData.currencies;
-  // ========== FILTERS FOR WHAT PLANTS APPEAR INITIALLY GO HERE ==========
-  // put [filtered] item on page with a chosenCurrency param
+
   const displayItems = (chosenCurrency) => {
-    // Find UL element that will contain our plants and empty it of any contents
     const plantsUL = document.querySelector('.plants-list');
     plantsUL.innerHTML = '';
-    // loop through plants and create an LI for each item
     plants.forEach((item, index) => {
       const newLI = document.createElement('li');
       newLI.innerHTML = `
-      <a href="#">
-        <img src="${item.url}" alt="${item.alt}"/>
-        <button class="btn-add">
+      <a id="item_${index}">
+        <img src="${item.url}" id="item_${index}" alt=""/>
+        <button class="btn-add" id="item_${index}">
           <img src="assets/icons/cart.svg" alt=""/>
         </button>
       </a>
       <p>${item.name}</p>
       <span>${chosenCurrency.symbol}${(item.price * chosenCurrency.exchange).toFixed(2)}</p>
       `;
-      // append the LI to UL
       plantsUL.appendChild(newLI);
-
       newLI.querySelector('button').addEventListener('click', (event) => {
-        event.preventDefault();
-
-        plants[index].cartQuantity += 1;
-        plants[index].storeQuantity -= 1;
-        update(dbRef, storeData);
+        const id = event.target.parentNode.id.slice(5);
+        console.log(event.target.parentNode.id.slice(5));
+        storeData.plants[id].cartQuantity += 1;
+        set(dbRef, storeData);
       });
     });
   };
   displayItems(currencies.cad);
-});
 
-// code for adding items to our cart
-// attach the event listener to the ul because the ul 'exists' to javascript when we load our page
-plantsUL.addEventListener('click', (event) => {
-  event.preventDefault();
+  // shopping cart display
+  const shoppingCart = document.querySelector('.cart');
+  shoppingCart.innerHTML = '';
+  plants
+    .filter((item) => item.cartQuantity > 0)
+    .forEach((item) => {
+      // render the cart items
+      const newLI = document.createElement('li');
+      newLI.innerHTML = `<img src="${item.url}" alt="" style= "max-height:50px"/> ${item.name} + ${item.cartQuantity}
+      <button class="increase">🔼</button>
+      <button class="decrease">🔽</button>
+      <button class="remove">❌</button>
+      `;
+      shoppingCart.appendChild(newLI);
 
-  // get src of selected plant and find corresponding index in firebase by looping through the array, finding a matching url property
+      // In this filtered list of plants,
 
-  if (event.target.tagName === 'IMG') {
-    const selectedSrc = event.target.parentElement.previousElementSibling.attributes.src.nodeValue;
-    console.log(selectedSrc);
+      // I need to find the plants in the database that were filtered above
+      // findIndex based on the name, item.name, I create a variable for the id
+      // Now I can use the id variable to update storeData.plants. Either increase, decrease, or remove from the database
+      // temp is a temporary placeholder, and looking for the exact match, in this case item.name
+      const id = plants.findIndex((temp) => temp.name === item.name);
 
-    get(shopRef).then((snapshot) => {
-      const plantData = snapshot.val();
-      const index = plantData.findIndex((plant) => plant.url === selectedSrc);
-      console.log(index);
-      console.log(plantData[index]);
-
-      if (plantData[index].cartQuantity === 0) {
-        addToCart(index);
-      }
-      // addToCart(index);
+      newLI.querySelector('.increase').addEventListener('click', () => {
+        storeData.plants[id].cartQuantity += 1;
+        set(dbRef, storeData);
+      });
+      newLI.querySelector('.decrease').addEventListener('click', () => {
+        storeData.plants[id].cartQuantity -= 1;
+        set(dbRef, storeData);
+      });
+      newLI.querySelector('.remove').addEventListener('click', () => {
+        storeData.plants[id].cartQuantity = 0;
+        set(dbRef, storeData);
+      });
     });
-
-    // const getIndex = (src) => {
-    //   get(shopRef).then((snapshot) => {
-    //     const plantData = snapshot.val();
-
-    //     const index = plantData.findIndex((plant) => plant.url === src);
-    //     console.log(index);
-    //     return index;
-    //   });
-    // };
-
-    // const selectedIndex = getIndex(selectedSrc);
-    // console.log(selectedIndex);
-  }
 });
 
-const addToCart = (selectedPlantIndex) => {
-  const chosenRef = ref(database, `/plants/${selectedPlantIndex}`);
-  get(chosenRef).then((snapshot) => {
-    const plantData = snapshot.val();
+const modal = document.querySelector('.modal');
+const openModal = document.querySelector('.shopping-cart');
+const closeModal = document.querySelector('.close-button');
 
-    const addedToCart = {
-      name: plantData.name,
-      imgUrl: plantData.url,
-      alt: plantData.alt,
-      cartQuantity: plantData.cartQuantity,
-    };
+openModal.addEventListener('click', () => {
+  modal.showModal(); //Allows to escape via esc button
+});
+closeModal.addEventListener('click', () => {
+  modal.close();
+});
 
-    const cartState = {
-      inCart: true,
-    };
-
-    update(chosenRef, cartState);
-
-    push(cartRef, addedToCart);
-  });
-};
-
-// const plantData = get(shopRef).then((snapshot) => {
-//   console.log(snapshot.val());
-// });
-
-// const getIndex = (src) => {
-//   get(shopRef).then((snapshot) => {
-//     const plantData = snapshot.val();
-
-//     const index = plantData.findIndex((plant) => plant.url === src);
-//     console.log(index);
-//     return index;
-//   });
-// };
-
-// ====================================================== //
-// ==================== OSMAN'S CODE ==================== //
-// ====================================================== //
-
-// ========== code for adding plants to our cart ==========
-// attached the event listener to the ul because the ul exists to javascript when we load our page
-
-// code for adding items to our favourites
-// attach the event listener to the ul because the ul exists to javascript when we load our page
-
-// ulElement.addEventListener('click', (event) => {
-//   // only run code if the user clicks on the BUTTON element
-//   if (event.target.tagName === 'BUTTON') {
-//     // get the id attribute value from the list item
-//     // pass the id attribute value as an argument to our addToCart function
-//     addToCart(event.target.parentElement.id);
-//   }
-// });
-
-// // Step 5:  Loop through the snapshot object.
-// const addToCart = (selectedPlant) => {
-//   // create a reference to the specific plant in firebase
-//   const chosenRef = ref(database, `/plants/${selectedPlant}`);
-//   console.log(selectedPlant);
-//   get(chosenRef).then((snapshot) => {
-//     const storeData = snapshot.val();
-//     // console.log(storeData)//testing
-
-//     // our new favourite animal object
-//     const favPlant = {
-//       alt: storeData.alt,
-//       imgUrl: storeData.url,
-//       id: storeData.id,
-//     };
-
-//     const favState = {
-//       isFavourited: true,
-//     };
-
-//     update(chosenRef, favState);
-
-//     // console.log(favPlant)//testing
-//     push(shoppingCartRef, favPlant);
-//   });
-//   // create a new object that represents our selected plant
-//   // this new object will have some of the properties of the original plant object
-//   // push this new object to a new location in firebase(/favourites section)
-// };
-
-// // display our selected plants
-// onValue(shoppingCartRef, (data) => {
-//   // clear out the section every time we add anew favourite to avoid data constatly appending and duplication on our page
-//   const ulElement = document.querySelector('#shoppingCart');
-
-//   ulElement.innerHTML = '';
-
-//   const favPlantData = data.val();
-//   // console.log(favPlantData)//testing
-//   // console.log('fav plant data', data.val)//testing
-
-//   // loop over our object and create our elements
-//   for (let key in favPlantData) {
-//     // console.log(favPlantData[key])//testing
-
-//     const listItem = document.createElement('li');
-
-//     const image = document.createElement('img');
-
-//     image.src = favPlantData[key].imgUrl;
-//     image.alt = favPlantData[key].alt;
-//     // console.log(image);//testing
-
-//     // add a remove button that will be for bonus content later
-//     const remove = document.createElement('button');
-//     remove.innerText = '❌';
-
-//     // append the image and button to the list item
-//     listItem.append(image, remove);
-//     // append the list item to the ul that already exists in our html
-//     ulElement.append(listItem);
-//   }
-// });
+/*
+NOTE: For the future, this is all wrong for multiple users because everyone will have acces to,
+and in turn be able to edit, the same shopping cart. 
+*/
