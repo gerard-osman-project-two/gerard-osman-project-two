@@ -198,7 +198,7 @@ plantsUL.addEventListener('click', (event) => {
       if (plantData[index].cartQuantity === 0) {
         addToCart(index);
       }
-      // addToCart(index);
+      addToCart(index);
     });
 
     // const getIndex = (src) => {
