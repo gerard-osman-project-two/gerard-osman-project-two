@@ -1,5 +1,5 @@
 import app from './firebaseConfig.js';
-import {getDatabase, ref, set, push, get, onValue} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
+import {getDatabase, ref, set, push, get, onValue, update} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-database.js';
 
 // Step 1:  Create a file (firebase.js) to configure and export the Firebase object.
 // Import the database object, and any required Firebase modules at the top of the main app file (app.js)
@@ -10,7 +10,7 @@ const dbRef = ref(database);
 
 // reference to the plants in our database
 const shopRef = ref(database, '/plants');
-// const shopRef = snapshot.value;
+const cartRef = ref(database, '/cart');
 
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
 
@@ -39,7 +39,7 @@ const plants = [
     price: 25.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p2.jpeg',
+    url: 'assets/p2.jpeg',
     alt: 'a black eyed susan plant',
     inCart: false,
   },
@@ -48,7 +48,7 @@ const plants = [
     price: 30.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p3.jpeg',
+    url: 'assets/p3.jpeg',
     alt: 'a bleeding heart plant',
     inCart: false,
   },
@@ -57,7 +57,7 @@ const plants = [
     price: 45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p4.jpeg',
+    url: 'assets/p4.jpeg',
     alt: 'a bloody cranesbill plant',
     inCart: false,
   },
@@ -66,7 +66,7 @@ const plants = [
     price: 50.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p5.jpeg',
+    url: 'assets/p5.jpeg',
     alt: 'a butterfly weed plant',
     inCart: false,
   },
@@ -75,7 +75,7 @@ const plants = [
     price: 65,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p6.jpeg',
+    url: 'assets/p6.jpeg',
     alt: 'a common yarrow plant',
     inCart: false,
   },
@@ -84,7 +84,7 @@ const plants = [
     price: 67.45,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p7.jpeg',
+    url: 'assets/p7.jpeg',
     alt: 'a double viburnum plant',
     inCart: false,
   },
@@ -93,7 +93,7 @@ const plants = [
     price: 20,
     cartQuantity: 0,
     storeQuantity: 10,
-    url: './assets/p8.jpeg',
+    url: 'assets/p8.jpeg',
     alt: 'a feather reed grass plant',
     inCart: false,
   },
@@ -151,7 +151,7 @@ onValue(dbRef, (data) => {
     const plantsUL = document.querySelector('.plants-list');
     plantsUL.innerHTML = '';
     // loop through plants and create an LI for each item
-    plants.forEach((item) => {
+    plants.forEach((item, index) => {
       const newLI = document.createElement('li');
       newLI.innerHTML = `
       <a href="#">
@@ -165,6 +165,14 @@ onValue(dbRef, (data) => {
       `;
       // append the LI to UL
       plantsUL.appendChild(newLI);
+
+      newLI.querySelector('button').addEventListener('click', (event) => {
+        event.preventDefault();
+
+        plants[index].cartQuantity += 1;
+        plants[index].storeQuantity -= 1;
+        update(dbRef, storeData);
+      });
     });
   };
   displayItems(currencies.cad);
@@ -173,21 +181,76 @@ onValue(dbRef, (data) => {
 // code for adding items to our cart
 // attach the event listener to the ul because the ul 'exists' to javascript when we load our page
 plantsUL.addEventListener('click', (event) => {
-  // console.log(event.target);
+  event.preventDefault();
+
+  // get src of selected plant and find corresponding index in firebase by looping through the array, finding a matching url property
+
   if (event.target.tagName === 'IMG') {
-    // console.log(event.target.parentElement.previousElementSibling.alt);
-    console.log(event.target.parentElement.previousElementSibling.attributes.src);
-    // addToCart(event.target.attributes.src);
+    const selectedSrc = event.target.parentElement.previousElementSibling.attributes.src.nodeValue;
+    console.log(selectedSrc);
+
+    get(shopRef).then((snapshot) => {
+      const plantData = snapshot.val();
+      const index = plantData.findIndex((plant) => plant.url === selectedSrc);
+      console.log(index);
+      console.log(plantData[index]);
+
+      if (plantData[index].cartQuantity === 0) {
+        addToCart(index);
+      }
+      // addToCart(index);
+    });
+
+    // const getIndex = (src) => {
+    //   get(shopRef).then((snapshot) => {
+    //     const plantData = snapshot.val();
+
+    //     const index = plantData.findIndex((plant) => plant.url === src);
+    //     console.log(index);
+    //     return index;
+    //   });
+    // };
+
+    // const selectedIndex = getIndex(selectedSrc);
+    // console.log(selectedIndex);
   }
 });
 
-// const addToCart = (selectedPlant) => {
-//   const chosenRef = ref(database, '/plants/0');
-// };
+const addToCart = (selectedPlantIndex) => {
+  const chosenRef = ref(database, `/plants/${selectedPlantIndex}`);
+  get(chosenRef).then((snapshot) => {
+    const plantData = snapshot.val();
 
-const plantData = get(shopRef).then((snapshot) => {
-  console.log(snapshot.val()[0].url);
-});
+    const addedToCart = {
+      name: plantData.name,
+      imgUrl: plantData.url,
+      alt: plantData.alt,
+      cartQuantity: plantData.cartQuantity,
+    };
+
+    const cartState = {
+      inCart: true,
+    };
+
+    update(chosenRef, cartState);
+
+    push(cartRef, addedToCart);
+  });
+};
+
+// const plantData = get(shopRef).then((snapshot) => {
+//   console.log(snapshot.val());
+// });
+
+// const getIndex = (src) => {
+//   get(shopRef).then((snapshot) => {
+//     const plantData = snapshot.val();
+
+//     const index = plantData.findIndex((plant) => plant.url === src);
+//     console.log(index);
+//     return index;
+//   });
+// };
 
 // ====================================================== //
 // ==================== OSMAN'S CODE ==================== //
