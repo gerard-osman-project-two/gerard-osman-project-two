@@ -7,10 +7,7 @@ import {getDatabase, ref, set, push, onValue} from 'https://www.gstatic.com/fire
 
 const database = getDatabase(app);
 const dbRef = ref(database);
-
 // reference to the plants in our database
-const plantRef = ref(database, '/plants');
-const cartRef = ref(database, '/cart');
 
 // Step 2:  Declare a function that will add our data both the inventory and the currencies, to our database.
 
@@ -19,108 +16,108 @@ const addToDatabase = (key, value) => {
   set(plantRef, value);
 };
 
-Array of plant, currency, and selected objects
-const plants = [
-  {
-    name: 'American marigold',
-    price: 23.45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p1.jpeg',
-  },
-  {
-    name: 'Black eyed susan',
-    price: 25.45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p2.jpeg',
-  },
-  {
-    name: 'Bleeding heart',
-    price: 30.45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p3.jpeg',
-  },
-  {
-    name: 'Bloody cranesbill',
-    price: 45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p4.jpeg',
-  },
-  {
-    name: 'Butterfly weed',
-    price: 50.45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p5.jpeg',
-  },
-  {
-    name: 'Common yarrow',
-    price: 65,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p6.jpeg',
-  },
-  {
-    name: 'Double viburnum',
-    price: 67.45,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p7.jpeg',
-  },
-  {
-    name: 'Feather reed grass',
-    price: 20,
-    cartQuantity: 0,
-    storeQuantity: 10,
-    url: './assets/p8.jpeg',
-  },
-];
-const currencies = {
-  usd: {
-    exchange: 1,
-    symbol: `$`,
-    displayName: `USD`,
-    altText: `the US flag`,
-    flag: `images/USD-flag.png`,
-  },
-  cad: {
-    exchange: 1.28,
-    symbol: `$`,
-    displayName: `CAD`,
-    altText: `the Canadian flag`,
-    flag: `images/CAD-flag.png`,
-  },
-  gbp: {
-    exchange: 0.76,
-    symbol: `£`,
-    displayName: `GBP`,
-    altText: `the UK flag`,
-    flag: `images/GBP-flag.png`,
-  },
-};
-const selected = {
-  test: {
-    testin1: 0,
-    testing2: 2,
-  }
-}
+// Array of plant, currency, and selected objects
+// const plants = [
+//   {
+//     name: 'American marigold',
+//     price: 23.45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p1.jpeg',
+//   },
+//   {
+//     name: 'Black eyed susan',
+//     price: 25.45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p2.jpeg',
+//   },
+//   {
+//     name: 'Bleeding heart',
+//     price: 30.45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p3.jpeg',
+//   },
+//   {
+//     name: 'Bloody cranesbill',
+//     price: 45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p4.jpeg',
+//   },
+//   {
+//     name: 'Butterfly weed',
+//     price: 50.45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p5.jpeg',
+//   },
+//   {
+//     name: 'Common yarrow',
+//     price: 65,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p6.jpeg',
+//   },
+//   {
+//     name: 'Double viburnum',
+//     price: 67.45,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p7.jpeg',
+//   },
+//   {
+//     name: 'Feather reed grass',
+//     price: 20,
+//     cartQuantity: 0,
+//     storeQuantity: 10,
+//     url: './assets/p8.jpeg',
+//   },
+// ];
+// const currencies = {
+//   usd: {
+//     exchange: 1,
+//     symbol: `$`,
+//     displayName: `USD`,
+//     altText: `the US flag`,
+//     flag: `images/USD-flag.png`,
+//   },
+//   cad: {
+//     exchange: 1.28,
+//     symbol: `$`,
+//     displayName: `CAD`,
+//     altText: `the Canadian flag`,
+//     flag: `images/CAD-flag.png`,
+//   },
+//   gbp: {
+//     exchange: 0.76,
+//     symbol: `£`,
+//     displayName: `GBP`,
+//     altText: `the UK flag`,
+//     flag: `images/GBP-flag.png`,
+//   },
+// };
+// const selected = {
+//   test: {
+//     testin1: 0,
+//     testing2: 2,
+//   }
+// }
 
-const cart = [];
+// const cart = [];
 
-const addToCart = (item) => {
+// const addToCart = (item) => {
 
-  item.cartQuantity = 1;
-  cart.push(item)
-  addToDatabase('cart', cart)
-}
+//   item.cartQuantity = 1;
+//   cart.push(item)
+//   addToDatabase('cart', cart)
+// }
 
-adding to the database
-addToDatabase('plants', plants);
-addToDatabase('currencies', currencies);
-addToDatabase('selected', selected);
+// adding to the database
+// addToDatabase('plants', plants);
+// addToDatabase('currencies', currencies);
+// addToDatabase('selected', selected);
 
 // const buttonsCart = () => {
 //   const removeCartItemButtons = document.getElementById("remove")
@@ -147,6 +144,7 @@ onValue(dbRef, (data) => {
   // window.storeData =storeData //global variable that I can access in the browser inspect and console.log whenever I need
   const plants = storeData.plants;
   const currencies = storeData.currencies;
+  const cartIconNum = document.querySelector('.cart-num');
 
   const displayItems = (chosenCurrency) => {
     const plantsUL = document.querySelector('.plants-list');
@@ -164,9 +162,12 @@ onValue(dbRef, (data) => {
       <span>${chosenCurrency.symbol}${(item.price * chosenCurrency.exchange).toFixed(2)}</p>
       `;
       plantsUL.appendChild(newLI);
+
       newLI.querySelector('button').addEventListener('click', (event) => {
+        event.preventDefault();
         const id = event.target.parentNode.id.slice(5);
-        console.log(event.target.parentNode.id.slice(5));
+
+        cartIconNum.innerText = parseInt(cartIconNum.innerText) + 1;
         storeData.plants[id].cartQuantity += 1;
         set(dbRef, storeData);
       });
@@ -199,13 +200,16 @@ onValue(dbRef, (data) => {
 
       newLI.querySelector('.increase').addEventListener('click', () => {
         storeData.plants[id].cartQuantity += 1;
+        cartIconNum.innerText = parseInt(cartIconNum.innerText) + 1;
         set(dbRef, storeData);
       });
       newLI.querySelector('.decrease').addEventListener('click', () => {
         storeData.plants[id].cartQuantity -= 1;
+        cartIconNum.innerText = parseInt(cartIconNum.innerText) - 1;
         set(dbRef, storeData);
       });
       newLI.querySelector('.remove').addEventListener('click', () => {
+        cartIconNum.innerText = parseInt(cartIconNum.innerText) - storeData.plants[id].cartQuantity;
         storeData.plants[id].cartQuantity = 0;
         set(dbRef, storeData);
       });
