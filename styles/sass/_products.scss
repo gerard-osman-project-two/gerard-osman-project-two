@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use "variables" as v;
 
 .products * {
   //   outline: 1px solid black;
@@ -20,7 +20,7 @@
   &::before,
   &::after {
     background-color: v.$green;
-    content: '';
+    content: "";
     display: inline-block;
     height: 2px;
     position: relative;
@@ -108,6 +108,12 @@
 .card span {
   color: v.$green;
   font-size: v.$fs-400;
+}
+
+.modal {
+  padding: 20px;
+  width: auto;
+  height: 500px;
 }
 
 // media queries

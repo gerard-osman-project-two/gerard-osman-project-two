@@ -864,11 +864,7 @@ footer .logo {
   margin-top: -2rem;
 }
 
-.modal {
-  padding: 20px;
-  width: 200px;
-  height: 200px;
-}
+
 
 @media (max-width: 768px) {
   .footer-wrapper {
